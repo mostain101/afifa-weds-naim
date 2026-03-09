@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afifa & Naim – Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold2:#E8C96A;--gold3:#F5E19A;
+  --gold-dim:rgba(201,168,76,0.3);
+  --em:#1A4A3A;--em2:#0F3028;--em3:#2D6B52;
+  --deep:#040C14;--cream:#FDF8EE;
+  --ts:rgba(253,248,238,0.85);
+}
+html,body{height:100%;width:100%;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Cormorant Garamond',serif}
+
+#stage{width:min(430px,95vw);height:min(764px,97vh);position:relative;overflow:hidden;background:var(--deep);box-shadow:0 0 120px rgba(201,168,76,0.15),0 0 400px rgba(0,0,0,0.9)}
+#bgCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.geo{position:absolute;inset:0;z-index:1;opacity:0.055;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(201,168,76,.5) 38px,rgba(201,168,76,.5) 39px),
+  repeating-linear-gradient(60deg,transparent,transparent 38px,rgba(201,168,76,.5) 38px,rgba(201,168,76,.5) 39px),
+  repeating-linear-gradient(120deg,transparent,transparent 38px,rgba(201,168,76,.5) 38px,rgba(201,168,76,.5) 39px)}
+.border-frame{position:absolute;inset:0;z-index:6;pointer-events:none;width:100%;height:100%}
+.persist-lanterns{position:absolute;top:0;left:0;right:0;z-index:7;pointer-events:none;display:flex;justify-content:space-between;padding:0 3%}
+.mosque-layer{position:absolute;bottom:0;left:0;right:0;z-index:2;pointer-events:none;opacity:0.5}
+.screen{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5% 6%;opacity:0;pointer-events:none;transition:opacity .8s ease}
+.screen.active{opacity:1;pointer-events:all}
+
+/* TEXT */
+.bismillah-ar{font-family:'Amiri',serif;font-size:clamp(19px,5vw,27px);color:var(--gold2);text-shadow:0 0 30px rgba(201,168,76,.7);line-height:2;letter-spacing:3px;animation:glowT 3s ease-in-out infinite}
+@keyframes glowT{0%,100%{text-shadow:0 0 20px rgba(201,168,76,.5)}50%{text-shadow:0 0 55px rgba(201,168,76,1),0 0 100px rgba(201,168,76,.4)}}
+.bismillah-en{font-style:italic;font-size:clamp(10px,2.2vw,13px);color:rgba(232,201,106,.65);letter-spacing:1.5px;margin-top:8px}
+.section-badge{font-family:'Amiri',serif;font-size:clamp(11px,2.5vw,15px);color:var(--gold);letter-spacing:3px;border:1px solid var(--gold-dim);padding:4px 18px;border-radius:20px;margin-bottom:12px;background:rgba(201,168,76,.05)}
+.person-name{font-family:'Great Vibes',cursive;font-size:clamp(32px,8.5vw,52px);color:var(--gold2);text-shadow:0 0 30px rgba(201,168,76,.5);line-height:1.15;margin-bottom:4px}
+.person-sub{font-family:'Cinzel Decorative',serif;font-size:clamp(8px,1.8vw,11px);color:rgba(232,201,106,.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.address-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);border-radius:6px;padding:13px 18px;width:88%;margin:0 auto 12px}
+.address-row{display:flex;align-items:flex-start;gap:10px;padding:5px 0;font-size:clamp(10px,2.2vw,13px);color:var(--ts);line-height:1.5;border-bottom:1px solid rgba(201,168,76,.06)}
+.address-row:last-child{border-bottom:none}
+.addr-icon{color:var(--gold);flex-shrink:0;font-size:12px;margin-top:2px}
+.addr-label{color:rgba(201,168,76,.6);font-size:.82em;letter-spacing:1px;display:block}
+.divider-gold{width:55%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:10px auto}
+.orn-row{display:flex;align-items:center;gap:8px;margin:4px 0;width:70%}
+.orn-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4))}
+.orn-l.r{background:linear-gradient(90deg,rgba(201,168,76,.4),transparent)}
+.orn-d{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+.schedule-title{font-family:'Cinzel Decorative',serif;font-size:clamp(13px,3vw,18px);color:var(--gold2);letter-spacing:3px;text-shadow:0 0 20px rgba(201,168,76,.4);margin-bottom:6px}
+.schedule-ar{font-family:'Amiri',serif;font-size:clamp(14px,3.2vw,20px);color:rgba(201,168,76,.5);margin-bottom:18px}
+.event-card{width:88%;background:linear-gradient(135deg,rgba(26,74,58,.15),rgba(6,15,26,.4));border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:13px 18px;margin-bottom:11px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--em3))}
+.event-icon{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.event-name{font-family:'Cinzel Decorative',serif;font-size:clamp(9px,2vw,12px);color:var(--gold2);letter-spacing:1px;display:block;margin-bottom:2px}
+.event-date{font-size:clamp(11px,2.5vw,15px);color:var(--cream);font-weight:300}
+.event-day{font-size:clamp(9px,1.8vw,11px);color:rgba(201,168,76,.55);letter-spacing:2px;text-transform:uppercase}
+.closing-msg{font-family:'Great Vibes',cursive;font-size:clamp(17px,4.5vw,26px);color:var(--gold2);text-align:center;text-shadow:0 0 25px rgba(201,168,76,.5);line-height:1.6;max-width:85%;margin:12px 0}
+.closing-dua{font-family:'Amiri',serif;font-size:clamp(15px,3.5vw,22px);color:rgba(232,201,106,.75);text-align:center;text-shadow:0 0 20px rgba(201,168,76,.4);line-height:1.9;margin:6px 0}
+.family-name{color:var(--gold2);letter-spacing:1px}
+
+/* COUNTDOWN */
+.cd-wrap{display:flex;gap:10px;justify-content:center;align-items:flex-start;margin:16px 0}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:4px}
+.cd-box{
+  width:clamp(60px,14vw,76px);height:clamp(60px,14vw,76px);
+  position:relative;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,rgba(201,168,76,0.12),rgba(26,74,58,0.18));
+  border:1px solid rgba(201,168,76,0.35);border-radius:6px;
+  overflow:hidden;
+}
+.cd-box::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,transparent 50%)}
+.cd-box::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(201,168,76,0.2)}
+.cd-num{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(22px,6vw,34px);
+  color:var(--gold2);
+  text-shadow:0 0 20px rgba(201,168,76,0.6);
+  line-height:1;
+  animation:cdPulse 1s ease-in-out;
+}
+@keyframes cdPulse{0%{transform:scale(1.15);opacity:.6}100%{transform:scale(1);opacity:1}}
+.cd-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(8px,1.8vw,10px);
+  color:rgba(201,168,76,0.6);
+  letter-spacing:2px;text-transform:uppercase;
+}
+.cd-sep{
+  font-family:'Amiri',serif;
+  font-size:clamp(22px,6vw,30px);
+  color:rgba(201,168,76,0.5);
+  margin-top:14px;
+  animation:blink 1s step-start infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.cd-title{font-family:'Cinzel Decorative',serif;font-size:clamp(11px,2.5vw,15px);color:var(--gold2);letter-spacing:3px;text-align:center;margin-bottom:4px;text-shadow:0 0 15px rgba(201,168,76,.4)}
+.cd-subtitle{font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(201,168,76,.45);text-align:center;margin-bottom:14px}
+.cd-event-label{font-size:clamp(10px,2.2vw,13px);color:rgba(253,248,238,.6);font-style:italic;letter-spacing:1.5px;text-align:center;margin-top:10px}
+.cd-date-badge{
+  background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(26,74,58,0.15));
+  border:1px solid rgba(201,168,76,0.28);
+  border-radius:8px;padding:8px 22px;margin:10px 0 4px;
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(10px,2.2vw,13px);
+  color:var(--gold2);letter-spacing:2px;
+  text-align:center;
+}
+.cd-finished{font-family:'Great Vibes',cursive;font-size:clamp(26px,7vw,42px);color:var(--gold2);text-align:center;text-shadow:0 0 30px rgba(201,168,76,.6);display:none}
+.moon-wrap{position:absolute;top:11%;left:50%;transform:translateX(-50%);animation:floatMoon 6s ease-in-out infinite;z-index:3}
+@keyframes floatMoon{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+.ray{position:absolute;top:0;left:50%;width:2px;transform-origin:top center;background:linear-gradient(180deg,rgba(201,168,76,.55) 0%,transparent 100%);animation:rayP 3s ease-in-out infinite}
+@keyframes rayP{0%,100%{opacity:.3;transform:var(--r) scaleX(1)}50%{opacity:.75;transform:var(--r) scaleX(3.5)}}
+.r1{height:45%;--r:rotate(-28deg);animation-delay:0s}
+.r2{height:42%;--r:rotate(-14deg);animation-delay:.25s}
+.r3{height:48%;--r:rotate(0deg);animation-delay:.1s}
+.r4{height:42%;--r:rotate(14deg);animation-delay:.35s}
+.r5{height:45%;--r:rotate(28deg);animation-delay:.2s}
+.ar{opacity:0;transform:translateY(20px);transition:opacity .85s ease,transform .85s ease}
+.af{opacity:0;transition:opacity .85s ease}
+.as{opacity:0;transform:scale(.93);transition:opacity .8s ease,transform .8s ease}
+.ar.in,.af.in,.as.in{opacity:1;transform:none}
+#progress{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--em3),var(--gold),var(--gold3));width:0%;z-index:100;transition:width .08s linear}
+#playBtn{position:absolute;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,12,20,.9);cursor:pointer;transition:opacity .6s}
+.play-ring{width:88px;height:88px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(201,168,76,.07),0 0 40px rgba(201,168,76,.3);animation:rP 2.5s ease-in-out infinite}
+@keyframes rP{0%,100%{box-shadow:0 0 0 10px rgba(201,168,76,.07),0 0 30px rgba(201,168,76,.3)}50%{box-shadow:0 0 0 20px rgba(201,168,76,.04),0 0 65px rgba(201,168,76,.65)}}
+#playBtn p{margin-top:16px;color:var(--gold);letter-spacing:4px;font-size:11px;text-transform:uppercase;font-family:'Cinzel Decorative',serif}
+#playBtn.gone{opacity:0;pointer-events:none}
+@keyframes sw1{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes sw2{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes sw3{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes lanternGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(255,200,80,.5))}50%{filter:drop-shadow(0 0 18px rgba(255,200,80,.95))}}
+</style>
+</head>
+<body>
+<div id="stage">
+<canvas id="bgCanvas"></canvas>
+<div class="geo"></div>
+
+<!-- PERSISTENT MOSQUE SILHOUETTE -->
+<div class="mosque-layer">
+<svg viewBox="0 0 430 260" fill="none" preserveAspectRatio="xMidYMax meet" style="width:100%;display:block">
+  <defs>
+    <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(4,10,20,0)"/>
+      <stop offset="70%" stop-color="rgba(8,18,38,0.1)"/>
+      <stop offset="100%" stop-color="rgba(4,10,20,0.55)"/>
+    </linearGradient>
+    <linearGradient id="mG2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(4,10,22,0.9)"/>
+      <stop offset="100%" stop-color="rgba(4,10,22,1)"/>
+    </linearGradient>
+    <filter id="gF"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <rect width="430" height="260" fill="url(#skyG)"/>
+  <!-- Far bg small mosques -->
+  <rect x="15" y="190" width="55" height="70" fill="rgba(4,10,22,0.5)"/>
+  <path d="M15 190 Q42 165 70 190" fill="rgba(4,10,22,0.5)"/>
+  <rect x="8" y="173" width="11" height="87" fill="rgba(4,10,22,0.5)"/>
+  <rect x="68" y="177" width="11" height="83" fill="rgba(4,10,22,0.5)"/>
+  <path d="M8 173 Q13 160 19 173" fill="rgba(4,10,22,0.5)"/>
+  <path d="M68 177 Q73 164 79 177" fill="rgba(4,10,22,0.5)"/>
+
+  <rect x="356" y="190" width="55" height="70" fill="rgba(4,10,22,0.5)"/>
+  <path d="M356 190 Q383 165 411 190" fill="rgba(4,10,22,0.5)"/>
+  <rect x="347" y="173" width="11" height="87" fill="rgba(4,10,22,0.5)"/>
+  <rect x="409" y="177" width="11" height="83" fill="rgba(4,10,22,0.5)"/>
+  <path d="M347 173 Q353 160 358 173" fill="rgba(4,10,22,0.5)"/>
+  <path d="M409 177 Q414 164 420 177" fill="rgba(4,10,22,0.5)"/>
+
+  <!-- Main mosque -->
+  <rect x="118" y="148" width="194" height="112" fill="url(#mG2)"/>
+  <!-- Dome -->
+  <path d="M138 148 Q215 78 292 148" fill="url(#mG2)"/>
+  <path d="M158 148 Q215 94 272 148" stroke="rgba(201,168,76,0.1)" stroke-width="0.7" fill="none"/>
+  <!-- Minarets -->
+  <rect x="96" y="85" width="21" height="175" fill="url(#mG2)"/>
+  <path d="M96 85 Q106 58 117 85" fill="url(#mG2)"/>
+  <rect x="100" y="53" width="13" height="18" fill="url(#mG2)"/>
+  <rect x="94" y="114" width="25" height="5" fill="rgba(201,168,76,0.18)"/>
+  <rect x="94" y="148" width="25" height="4" fill="rgba(201,168,76,0.12)"/>
+  <rect x="313" y="85" width="21" height="175" fill="url(#mG2)"/>
+  <path d="M313 85 Q323 58 334 85" fill="url(#mG2)"/>
+  <rect x="317" y="53" width="13" height="18" fill="url(#mG2)"/>
+  <rect x="311" y="114" width="25" height="5" fill="rgba(201,168,76,0.18)"/>
+  <rect x="311" y="148" width="25" height="4" fill="rgba(201,168,76,0.12)"/>
+  <!-- Secondary minarets -->
+  <rect x="124" y="116" width="15" height="144" fill="url(#mG2)"/>
+  <path d="M124 116 Q131 100 138 116" fill="url(#mG2)"/>
+  <rect x="291" y="116" width="15" height="144" fill="url(#mG2)"/>
+  <path d="M291 116 Q298 100 305 116" fill="url(#mG2)"/>
+  <!-- Side domes -->
+  <path d="M138 166 Q157 144 176 166" fill="url(#mG2)"/>
+  <path d="M254 166 Q273 144 292 166" fill="url(#mG2)"/>
+  <path d="M118 178 Q130 162 143 178" fill="url(#mG2)"/>
+  <path d="M287 178 Q300 162 312 178" fill="url(#mG2)"/>
+  <!-- Arch windows -->
+  <path d="M196 192 Q215 170 234 192 L234 240 L196 240Z" fill="rgba(201,168,76,0.07)"/>
+  <path d="M196 192 Q215 175 234 192" stroke="rgba(201,168,76,0.25)" stroke-width="0.8" fill="none"/>
+  <path d="M152 205 Q164 188 176 205 L176 240 L152 240Z" fill="rgba(201,168,76,0.04)"/>
+  <path d="M254 205 Q266 188 278 205 L278 240 L254 240Z" fill="rgba(201,168,76,0.04)"/>
+  <!-- Crescents -->
+  <path d="M100 58 C97 58 94.5 60.5 94.5 64 C94.5 67.5 97 70 100 70 C97 68.5 96 65.5 97 63 C98.5 58.5 102 56.5 106 57.5Z" fill="rgba(201,168,76,0.75)"/>
+  <path d="M105 53 L106.3 57 L110 57 L107.3 59.5 L108.3 63.5 L105 61.5 L101.7 63.5 L102.7 59.5 L100 57 L103.7 57Z" fill="rgba(201,168,76,0.85)"/>
+  <path d="M317 58 C314 58 311.5 60.5 311.5 64 C311.5 67.5 314 70 317 70 C314 68.5 313 65.5 314 63 C315.5 58.5 319 56.5 323 57.5Z" fill="rgba(201,168,76,0.75)"/>
+  <path d="M322 53 L323.3 57 L327 57 L324.3 59.5 L325.3 63.5 L322 61.5 L318.7 63.5 L319.7 59.5 L317 57 L320.7 57Z" fill="rgba(201,168,76,0.85)"/>
+  <!-- Main dome crescent -->
+  <path d="M210 84 C206 84 202 88 202 93 C202 98 206 102 210 102 C205.5 99.5 203.5 94.5 205.5 90 C207.5 83.5 214 80.5 221 82.5Z" fill="rgba(201,168,76,0.82)"/>
+  <path d="M219 78 L221 83.5 L227 83.5 L222.5 87 L224 92.5 L219 89 L214 92.5 L215.5 87 L211 83.5 L217 83.5Z" fill="rgba(201,168,76,0.92)"/>
+  <!-- Lantern glows -->
+  <circle cx="106" cy="113" r="3" fill="rgba(255,200,80,0.55)"/>
+  <circle cx="324" cy="113" r="3" fill="rgba(255,200,80,0.55)"/>
+  <!-- Ground -->
+  <rect x="0" y="252" width="430" height="9" fill="rgba(4,10,22,0.85)"/>
+</svg>
+</div>
+
+<!-- PERSISTENT LANTERNS -->
+<div class="persist-lanterns">
+  <!-- LEFT pair -->
+  <div style="display:flex;gap:4px;align-items:flex-start">
+    <div style="animation:sw1 4.5s ease-in-out infinite,lanternGlow 3s ease-in-out infinite;transform-origin:top center">
+      <svg width="32" height="95" viewBox="0 0 32 95" fill="none">
+        <line x1="16" y1="0" x2="16" y2="9" stroke="rgba(201,168,76,0.75)" stroke-width="1.5"/>
+        <circle cx="16" cy="4" r="1.5" fill="rgba(201,168,76,0.55)"/>
+        <circle cx="16" cy="7" r="1" fill="rgba(201,168,76,0.4)"/>
+        <!-- cap -->
+        <path d="M7 9 L25 9 L27 15 L5 15 Z" fill="rgba(201,168,76,0.55)" stroke="rgba(201,168,76,0.85)" stroke-width="0.7"/>
+        <!-- star on cap -->
+        <path d="M16 10.5 L16.7 12.7 L19 12.7 L17.2 14 L17.9 16.2 L16 15 L14.1 16.2 L14.8 14 L13 12.7 L15.3 12.7Z" fill="rgba(201,168,76,0.7)" transform="scale(0.55) translate(13,3)"/>
+        <!-- body -->
+        <path d="M5 15 L3 24 L3 60 L5 68 L27 68 L29 60 L29 24 L27 15Z" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.7)" stroke-width="0.9"/>
+        <!-- vertical ribs -->
+        <line x1="9.5" y1="15" x2="8.5" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <line x1="16" y1="15" x2="16" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <line x1="22.5" y1="15" x2="23.5" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <!-- horizontal bands -->
+        <rect x="3" y="36" width="26" height="3.5" fill="rgba(201,168,76,0.22)"/>
+        <rect x="3" y="48" width="26" height="2" fill="rgba(201,168,76,0.14)"/>
+        <!-- geometric cutout pattern -->
+        <path d="M9 22 L11 26 L9 30 M23 22 L21 26 L23 30" stroke="rgba(201,168,76,0.2)" stroke-width="0.6" fill="none"/>
+        <!-- inner flame -->
+        <ellipse cx="16" cy="41" rx="7" ry="11" fill="rgba(255,180,60,0.13)"/>
+        <ellipse cx="16" cy="38" rx="4" ry="6" fill="rgba(255,200,80,0.1)"/>
+        <!-- bottom cap -->
+        <path d="M5 68 L27 68 L25 75 L7 75 Z" fill="rgba(201,168,76,0.5)" stroke="rgba(201,168,76,0.75)" stroke-width="0.7"/>
+        <line x1="16" y1="75" x2="16" y2="85" stroke="rgba(201,168,76,0.7)" stroke-width="1.5"/>
+        <ellipse cx="16" cy="87" rx="6" ry="2.5" fill="rgba(201,168,76,0.38)"/>
+        <!-- tassel -->
+        <line x1="12" y1="85" x2="11" y2="93" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <line x1="16" y1="85" x2="16" y2="95" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <line x1="20" y1="85" x2="21" y2="93" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <circle cx="11" cy="93" r="1" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="16" cy="95" r="1" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="21" cy="93" r="1" fill="rgba(201,168,76,0.4)"/>
+      </svg>
+    </div>
+    <div style="margin-top:18px;animation:sw2 5.5s ease-in-out infinite;transform-origin:top center">
+      <svg width="22" height="64" viewBox="0 0 22 64" fill="none">
+        <line x1="11" y1="0" x2="11" y2="7" stroke="rgba(201,168,76,0.65)" stroke-width="1.2"/>
+        <circle cx="11" cy="3.5" r="1.2" fill="rgba(201,168,76,0.45)"/>
+        <path d="M4 7 L18 7 L20 12 L2 12 Z" fill="rgba(201,168,76,0.48)" stroke="rgba(201,168,76,0.75)" stroke-width="0.6"/>
+        <path d="M2 12 L1 18 L1 42 L2 47 L20 47 L21 42 L21 18 L20 12Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.58)" stroke-width="0.7"/>
+        <line x1="7" y1="12" x2="6.5" y2="47" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+        <line x1="15" y1="12" x2="15.5" y2="47" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+        <rect x="1" y="27" width="20" height="2.5" fill="rgba(201,168,76,0.18)"/>
+        <ellipse cx="11" cy="29" rx="5" ry="8" fill="rgba(255,180,60,0.11)"/>
+        <path d="M2 47 L20 47 L18 52 L4 52 Z" fill="rgba(201,168,76,0.42)" stroke="rgba(201,168,76,0.65)" stroke-width="0.5"/>
+        <line x1="11" y1="52" x2="11" y2="60" stroke="rgba(201,168,76,0.55)" stroke-width="1.1"/>
+        <ellipse cx="11" cy="62" rx="4" ry="1.8" fill="rgba(201,168,76,0.28)"/>
+      </svg>
+    </div>
+  </div>
+  <!-- RIGHT pair -->
+  <div style="display:flex;gap:4px;align-items:flex-start">
+    <div style="margin-top:22px;animation:sw3 5s ease-in-out infinite;transform-origin:top center">
+      <svg width="22" height="64" viewBox="0 0 22 64" fill="none">
+        <line x1="11" y1="0" x2="11" y2="7" stroke="rgba(201,168,76,0.65)" stroke-width="1.2"/>
+        <circle cx="11" cy="3.5" r="1.2" fill="rgba(201,168,76,0.45)"/>
+        <path d="M4 7 L18 7 L20 12 L2 12 Z" fill="rgba(201,168,76,0.48)" stroke="rgba(201,168,76,0.75)" stroke-width="0.6"/>
+        <path d="M2 12 L1 18 L1 42 L2 47 L20 47 L21 42 L21 18 L20 12Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.58)" stroke-width="0.7"/>
+        <line x1="7" y1="12" x2="6.5" y2="47" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+        <line x1="15" y1="12" x2="15.5" y2="47" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+        <rect x="1" y="27" width="20" height="2.5" fill="rgba(201,168,76,0.18)"/>
+        <ellipse cx="11" cy="29" rx="5" ry="8" fill="rgba(255,180,60,0.11)"/>
+        <path d="M2 47 L20 47 L18 52 L4 52 Z" fill="rgba(201,168,76,0.42)" stroke="rgba(201,168,76,0.65)" stroke-width="0.5"/>
+        <line x1="11" y1="52" x2="11" y2="60" stroke="rgba(201,168,76,0.55)" stroke-width="1.1"/>
+        <ellipse cx="11" cy="62" rx="4" ry="1.8" fill="rgba(201,168,76,0.28)"/>
+      </svg>
+    </div>
+    <div style="animation:sw1 4s ease-in-out infinite,lanternGlow 3.5s ease-in-out 0.5s infinite;transform-origin:top center">
+      <svg width="32" height="95" viewBox="0 0 32 95" fill="none">
+        <line x1="16" y1="0" x2="16" y2="9" stroke="rgba(201,168,76,0.75)" stroke-width="1.5"/>
+        <circle cx="16" cy="4" r="1.5" fill="rgba(201,168,76,0.55)"/>
+        <circle cx="16" cy="7" r="1" fill="rgba(201,168,76,0.4)"/>
+        <path d="M7 9 L25 9 L27 15 L5 15 Z" fill="rgba(201,168,76,0.55)" stroke="rgba(201,168,76,0.85)" stroke-width="0.7"/>
+        <path d="M5 15 L3 24 L3 60 L5 68 L27 68 L29 60 L29 24 L27 15Z" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.7)" stroke-width="0.9"/>
+        <line x1="9.5" y1="15" x2="8.5" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <line x1="16" y1="15" x2="16" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <line x1="22.5" y1="15" x2="23.5" y2="68" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+        <rect x="3" y="36" width="26" height="3.5" fill="rgba(201,168,76,0.22)"/>
+        <rect x="3" y="48" width="26" height="2" fill="rgba(201,168,76,0.14)"/>
+        <ellipse cx="16" cy="41" rx="7" ry="11" fill="rgba(255,180,60,0.13)"/>
+        <ellipse cx="16" cy="38" rx="4" ry="6" fill="rgba(255,200,80,0.1)"/>
+        <path d="M5 68 L27 68 L25 75 L7 75 Z" fill="rgba(201,168,76,0.5)" stroke="rgba(201,168,76,0.75)" stroke-width="0.7"/>
+        <line x1="16" y1="75" x2="16" y2="85" stroke="rgba(201,168,76,0.7)" stroke-width="1.5"/>
+        <ellipse cx="16" cy="87" rx="6" ry="2.5" fill="rgba(201,168,76,0.38)"/>
+        <line x1="12" y1="85" x2="11" y2="93" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <line x1="16" y1="85" x2="16" y2="95" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <line x1="20" y1="85" x2="21" y2="93" stroke="rgba(201,168,76,0.38)" stroke-width="0.8"/>
+        <circle cx="11" cy="93" r="1" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="16" cy="95" r="1" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="21" cy="93" r="1" fill="rgba(201,168,76,0.4)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- BORDER FRAME -->
+<svg class="border-frame" viewBox="0 0 430 764" fill="none" preserveAspectRatio="none">
+  <rect x="9" y="9" width="412" height="746" stroke="rgba(201,168,76,0.45)" stroke-width="1.2"/>
+  <rect x="17" y="17" width="396" height="730" stroke="rgba(201,168,76,0.14)" stroke-width="0.5"/>
+  <path d="M9 9 L88 9 L88 16 L16 16 L16 88 L9 88 Z" fill="rgba(201,168,76,0.5)"/>
+  <path d="M18 18 L72 18 L72 23 L23 23 L23 72 L18 72 Z" fill="rgba(201,168,76,0.2)"/>
+  <rect x="9" y="9" width="13" height="13" fill="rgba(201,168,76,0.65)"/>
+  <path d="M421 9 L342 9 L342 16 L414 16 L414 88 L421 88 Z" fill="rgba(201,168,76,0.5)"/>
+  <path d="M412 18 L358 18 L358 23 L407 23 L407 72 L412 72 Z" fill="rgba(201,168,76,0.2)"/>
+  <rect x="408" y="9" width="13" height="13" fill="rgba(201,168,76,0.65)"/>
+  <path d="M9 755 L88 755 L88 748 L16 748 L16 676 L9 676 Z" fill="rgba(201,168,76,0.5)"/>
+  <path d="M18 746 L72 746 L72 741 L23 741 L23 692 L18 692 Z" fill="rgba(201,168,76,0.2)"/>
+  <rect x="9" y="742" width="13" height="13" fill="rgba(201,168,76,0.65)"/>
+  <path d="M421 755 L342 755 L342 748 L414 748 L414 676 L421 676 Z" fill="rgba(201,168,76,0.5)"/>
+  <path d="M412 746 L358 746 L358 741 L407 741 L407 692 L412 692 Z" fill="rgba(201,168,76,0.2)"/>
+  <rect x="408" y="742" width="13" height="13" fill="rgba(201,168,76,0.65)"/>
+  <path d="M150 18 Q215 0 280 18" stroke="rgba(201,168,76,0.55)" stroke-width="1.2" fill="none"/>
+  <path d="M130 27 Q215 5 300 27" stroke="rgba(201,168,76,0.2)" stroke-width="0.5" fill="none"/>
+  <circle cx="215" cy="11" r="3.5" fill="rgba(201,168,76,0.65)"/>
+  <path d="M150 746 Q215 764 280 746" stroke="rgba(201,168,76,0.55)" stroke-width="1.2" fill="none"/>
+  <path d="M130 737 Q215 759 300 737" stroke="rgba(201,168,76,0.2)" stroke-width="0.5" fill="none"/>
+  <circle cx="215" cy="753" r="3.5" fill="rgba(201,168,76,0.65)"/>
+  <rect x="11" y="375" width="9" height="9" transform="rotate(45 15.5 379.5)" fill="rgba(201,168,76,0.55)"/>
+  <rect x="410" y="375" width="9" height="9" transform="rotate(45 414.5 379.5)" fill="rgba(201,168,76,0.55)"/>
+  <line x1="9" y1="250" x2="17" y2="250" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+  <line x1="9" y1="510" x2="17" y2="510" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+  <line x1="421" y1="250" x2="413" y2="250" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+  <line x1="421" y1="510" x2="413" y2="510" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+</svg>
+
+<!-- ═══ SCREEN 1: BISMILLAH ═══ -->
+<div class="screen" id="s1" style="background:radial-gradient(ellipse 70% 50% at 50% 60%,rgba(26,74,58,0.18) 0%,transparent 70%)">
+  <div style="position:absolute;top:18%;left:50%;width:1px;height:1px;z-index:3">
+    <div class="ray r1"></div><div class="ray r2"></div><div class="ray r3"></div><div class="ray r4"></div><div class="ray r5"></div>
+  </div>
+  <div class="moon-wrap as" id="s1-moon" style="z-index:4">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+      <defs><radialGradient id="mGr" cx="38%" cy="32%"><stop offset="0%" stop-color="#F5E19A"/><stop offset="55%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#7A5A10"/></radialGradient><filter id="mFl"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(201,168,76,0.14)" stroke-width="1"/>
+      <circle cx="50" cy="50" r="42" fill="rgba(201,168,76,0.04)"/>
+      <path d="M50 12 C30 12 16 27 16 47 C16 67 30 82 50 82 C34 73 25 58 27 43 C29 24 44 13 63 16 C59 13 55 12 50 12Z" fill="url(#mGr)" filter="url(#mFl)"/>
+      <path d="M71 24 L73.5 31.5 L81.5 31.5 L75 36 L77.5 43.5 L71 39 L64.5 43.5 L67 36 L60.5 31.5 L68.5 31.5 Z" fill="#F5E19A" opacity="0.95"/>
+      <path d="M81 16 L82 19 L85 19 L82.5 21 L83.5 24 L81 22.5 L78.5 24 L79.5 21 L77 19 L80 19 Z" fill="#F5E19A" opacity="0.7"/>
+    </svg>
+  </div>
+  <!-- Islamic arch under moon -->
+  <div style="position:absolute;top:30%;width:90%;z-index:3" class="af" id="s1-arch">
+    <svg viewBox="0 0 380 55" fill="none">
+      <path d="M10 55 Q10 15 100 8 Q190 2 280 8 Q370 15 370 55" stroke="rgba(201,168,76,0.35)" stroke-width="1" fill="none"/>
+      <path d="M30 55 Q30 22 105 16 Q190 10 275 16 Q350 22 350 55" stroke="rgba(201,168,76,0.15)" stroke-width="0.5" fill="none"/>
+      <circle cx="190" cy="5" r="3" fill="rgba(201,168,76,0.5)"/>
+      <ellipse cx="55" cy="28" rx="7" ry="4" fill="rgba(201,168,76,0.14)" transform="rotate(-25 55 28)"/>
+      <ellipse cx="325" cy="28" rx="7" ry="4" fill="rgba(201,168,76,0.14)" transform="rotate(25 325 28)"/>
+      <ellipse cx="120" cy="14" rx="5" ry="3" fill="rgba(201,168,76,0.11)" transform="rotate(-12 120 14)"/>
+      <ellipse cx="260" cy="14" rx="5" ry="3" fill="rgba(201,168,76,0.11)" transform="rotate(12 260 14)"/>
+      <path d="M190 2 L190.8 4.5 L193.5 4.5 L191.4 6 L192.2 8.5 L190 7 L187.8 8.5 L188.6 6 L186.5 4.5 L189.2 4.5Z" fill="rgba(201,168,76,0.6)"/>
+    </svg>
+  </div>
+  <div style="position:absolute;top:37%;width:100%;text-align:center;padding:0 10%;z-index:4">
+    <div class="bismillah-ar af" id="s1-bism">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    <div class="bismillah-en ar" id="s1-en">In the name of Allah, the Most Gracious, the Most Merciful</div>
+    <div style="width:45%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.6),transparent);margin:14px auto" class="af" id="s1-div"></div>
+    <div class="af" id="s1-motif" style="margin:8px 0">
+      <svg width="65" height="30" viewBox="0 0 65 30" fill="none" style="margin:0 auto;display:block">
+        <path d="M15 6 C10 6 6 10 6 15 C6 20 10 24 15 24 C11 22 9 18 10 14 C11 8 16 5 22 6.5 C20 6 17.5 6 15 6Z" fill="rgba(201,168,76,0.72)"/>
+        <path d="M23 2 L24.5 7 L30 7 L25.5 10.5 L27 15 L23 12.5 L19 15 L20.5 10.5 L16 7 L21.5 7Z" fill="rgba(201,168,76,0.88)"/>
+        <line x1="34" y1="15" x2="62" y2="15" stroke="rgba(201,168,76,0.28)" stroke-width="0.8"/>
+        <circle cx="48" cy="15" r="1.5" fill="rgba(201,168,76,0.5)"/>
+        <circle cx="55" cy="15" r="1" fill="rgba(201,168,76,0.35)"/>
+      </svg>
+    </div>
+    <div style="font-size:clamp(11px,2.5vw,14px);color:rgba(253,248,238,0.48);letter-spacing:4px;text-transform:uppercase;margin-top:10px" class="ar" id="s1-sub">Wedding Invitation</div>
+    <div style="font-family:'Great Vibes',cursive;font-size:clamp(30px,7.5vw,46px);color:rgba(201,168,76,0.85);margin-top:10px;text-shadow:0 0 25px rgba(201,168,76,0.4)" class="as" id="s1-names">Afifa &amp; Naim</div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 2: BRIDE ═══ -->
+<div class="screen" id="s2" style="background:radial-gradient(ellipse 80% 55% at 50% 35%,rgba(26,74,58,0.18) 0%,transparent 70%);padding-top:13%">
+  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(201,168,76,0.38)" class="af" id="s2-arab">الـعـروس</div>
+  <div style="width:85%;margin:0 auto 6px" class="as" id="s2-arch">
+    <svg viewBox="0 0 340 70" fill="none">
+      <path d="M8 70 Q8 22 90 10 Q170 2 250 10 Q332 22 332 70" stroke="rgba(201,168,76,0.5)" stroke-width="1" fill="rgba(201,168,76,0.02)"/>
+      <path d="M25 70 Q25 32 95 22 Q170 14 245 22 Q315 32 315 70" stroke="rgba(201,168,76,0.2)" stroke-width="0.5" fill="none"/>
+      <circle cx="170" cy="6" r="4" fill="rgba(201,168,76,0.6)"/>
+      <path d="M162 10 Q170 2 178 10" stroke="rgba(201,168,76,0.4)" stroke-width="0.6" fill="none"/>
+      <ellipse cx="42" cy="40" rx="8" ry="5" fill="rgba(201,168,76,0.17)" transform="rotate(-30 42 40)"/>
+      <ellipse cx="55" cy="28" rx="6" ry="4" fill="rgba(201,168,76,0.12)" transform="rotate(-18 55 28)"/>
+      <ellipse cx="298" cy="40" rx="8" ry="5" fill="rgba(201,168,76,0.17)" transform="rotate(30 298 40)"/>
+      <ellipse cx="285" cy="28" rx="6" ry="4" fill="rgba(201,168,76,0.12)" transform="rotate(18 285 28)"/>
+      <path d="M100 18 L101 21 L104 21 L101.5 23 L102.5 26 L100 24.5 L97.5 26 L98.5 23 L96 21 L99 21Z" fill="rgba(201,168,76,0.45)"/>
+      <path d="M240 18 L241 21 L244 21 L241.5 23 L242.5 26 L240 24.5 L237.5 26 L238.5 23 L236 21 L239 21Z" fill="rgba(201,168,76,0.45)"/>
+    </svg>
+  </div>
+  <div class="section-badge af" id="s2-badge">The Bride</div>
+  <div class="person-name ar" id="s2-name">Afifa Khatun</div>
+  <div class="person-sub ar" id="s2-title" style="transition-delay:.15s">D/O Sahar Ali Sarkar</div>
+  <div class="address-card ar" id="s2-addr" style="transition-delay:.3s">
+    <div class="address-row"><span class="addr-icon">🏡</span><div><span class="addr-label">Village</span>Tapan Chanchalapara</div></div>
+    <div class="address-row"><span class="addr-icon">📮</span><div><span class="addr-label">P.O + P.S</span>Tapan</div></div>
+    <div class="address-row"><span class="addr-icon">📍</span><div><span class="addr-label">District</span>Dakshin Dinajpur</div></div>
+  </div>
+  <div class="divider-gold af" id="s2-dv" style="transition-delay:.5s"></div>
+  <div class="af" id="s2-crescent" style="transition-delay:.62s;margin:4px 0">
+    <svg width="44" height="24" viewBox="0 0 44 24" fill="none" style="display:block;margin:0 auto">
+      <path d="M12 4 C7.5 4 4 8 4 12 C4 16 7.5 20 12 20 C8.5 18.5 6.5 15 7.5 11.5 C8.5 6.5 13 4 18.5 5Z" fill="rgba(201,168,76,0.68)"/>
+      <path d="M18 1 L19.4 5.5 L24.2 5.5 L20.4 8.2 L21.8 12.7 L18 10 L14.2 12.7 L15.6 8.2 L11.8 5.5 L16.6 5.5Z" fill="rgba(201,168,76,0.85)"/>
+      <line x1="27" y1="12" x2="44" y2="12" stroke="rgba(201,168,76,0.28)" stroke-width="0.8"/>
+      <circle cx="35" cy="12" r="1.5" fill="rgba(201,168,76,0.45)"/>
+    </svg>
+  </div>
+  <div class="orn-row af" id="s2-orn" style="transition-delay:.75s"><div class="orn-l"></div><div class="orn-d"></div><div class="orn-l r"></div></div>
+</div>
+
+<!-- ═══ SCREEN 3: GROOM ═══ -->
+<div class="screen" id="s3" style="background:radial-gradient(ellipse 80% 55% at 50% 35%,rgba(15,48,40,0.2) 0%,transparent 70%);padding-top:13%">
+  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(45,107,82,0.5)" class="af" id="s3-arab">العـريـس</div>
+  <div style="width:85%;margin:0 auto 6px" class="as" id="s3-arch">
+    <svg viewBox="0 0 340 70" fill="none">
+      <path d="M8 70 Q8 22 90 10 Q170 2 250 10 Q332 22 332 70" stroke="rgba(45,107,82,0.65)" stroke-width="1" fill="rgba(45,107,82,0.03)"/>
+      <path d="M25 70 Q25 32 95 22 Q170 14 245 22 Q315 32 315 70" stroke="rgba(45,107,82,0.28)" stroke-width="0.5" fill="none"/>
+      <circle cx="170" cy="6" r="4" fill="rgba(45,107,82,0.7)"/>
+      <path d="M162 10 Q170 2 178 10" stroke="rgba(45,107,82,0.4)" stroke-width="0.6" fill="none"/>
+      <ellipse cx="42" cy="40" rx="8" ry="5" fill="rgba(45,107,82,0.2)" transform="rotate(-30 42 40)"/>
+      <ellipse cx="55" cy="28" rx="6" ry="4" fill="rgba(45,107,82,0.15)" transform="rotate(-18 55 28)"/>
+      <ellipse cx="298" cy="40" rx="8" ry="5" fill="rgba(45,107,82,0.2)" transform="rotate(30 298 40)"/>
+      <ellipse cx="285" cy="28" rx="6" ry="4" fill="rgba(45,107,82,0.15)" transform="rotate(18 285 28)"/>
+      <path d="M100 18 L101 21 L104 21 L101.5 23 L102.5 26 L100 24.5 L97.5 26 L98.5 23 L96 21 L99 21Z" fill="rgba(201,168,76,0.4)"/>
+      <path d="M240 18 L241 21 L244 21 L241.5 23 L242.5 26 L240 24.5 L237.5 26 L238.5 23 L236 21 L239 21Z" fill="rgba(201,168,76,0.4)"/>
+    </svg>
+  </div>
+  <div class="section-badge af" id="s3-badge" style="border-color:rgba(45,107,82,0.4);color:rgba(180,230,200,0.8)">The Groom</div>
+  <div class="person-name ar" id="s3-name" style="color:rgba(195,230,210,0.92);text-shadow:0 0 30px rgba(45,107,82,0.7)">Abu Sadat Naim</div>
+  <div class="person-sub ar" id="s3-title" style="transition-delay:.15s">S/O Late Aminul Haque</div>
+  <div class="address-card ar" id="s3-addr" style="transition-delay:.3s;border-color:rgba(45,107,82,0.28)">
+    <div class="address-row"><span class="addr-icon">🏡</span><div><span class="addr-label">Village</span>Kushmandi Kharipara</div></div>
+    <div class="address-row"><span class="addr-icon">📮</span><div><span class="addr-label">P.O</span>Sibkrisnapur</div></div>
+    <div class="address-row"><span class="addr-icon">🚔</span><div><span class="addr-label">P.S</span>Kushmandi</div></div>
+    <div class="address-row"><span class="addr-icon">📍</span><div><span class="addr-label">District</span>Dakshin Dinajpur</div></div>
+  </div>
+  <div class="divider-gold af" id="s3-dv" style="transition-delay:.5s;background:linear-gradient(90deg,transparent,rgba(45,107,82,0.6),transparent)"></div>
+  <div class="af" id="s3-crescent" style="transition-delay:.62s;margin:4px 0">
+    <svg width="44" height="24" viewBox="0 0 44 24" fill="none" style="display:block;margin:0 auto">
+      <path d="M12 4 C7.5 4 4 8 4 12 C4 16 7.5 20 12 20 C8.5 18.5 6.5 15 7.5 11.5 C8.5 6.5 13 4 18.5 5Z" fill="rgba(45,107,82,0.72)"/>
+      <path d="M18 1 L19.4 5.5 L24.2 5.5 L20.4 8.2 L21.8 12.7 L18 10 L14.2 12.7 L15.6 8.2 L11.8 5.5 L16.6 5.5Z" fill="rgba(45,107,82,0.9)"/>
+    </svg>
+  </div>
+  <div class="orn-row af" id="s3-orn" style="transition-delay:.75s">
+    <div class="orn-l" style="background:linear-gradient(90deg,transparent,rgba(45,107,82,0.45))"></div>
+    <div class="orn-d" style="background:var(--em3)"></div>
+    <div class="orn-l r" style="background:linear-gradient(90deg,rgba(45,107,82,0.45),transparent)"></div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 4: SCHEDULE ═══ -->
+<div class="screen" id="s4" style="justify-content:flex-start;padding-top:12%">
+  <div style="width:100%;text-align:center;margin-bottom:4px" class="af" id="s4-mini">
+    <svg width="130" height="42" viewBox="0 0 130 42" fill="none" style="display:block;margin:0 auto">
+      <rect x="38" y="22" width="54" height="20" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.28)" stroke-width="0.6"/>
+      <path d="M38 22 Q65 5 92 22" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.38)" stroke-width="0.7"/>
+      <rect x="24" y="13" width="13" height="29" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+      <path d="M24 13 Q30 3 37 13" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.32)" stroke-width="0.5"/>
+      <rect x="93" y="13" width="13" height="29" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+      <path d="M93 13 Q99 3 106 13" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.32)" stroke-width="0.5"/>
+      <path d="M62 11 C59.5 11 57.5 13.5 57.5 16.5 C57.5 19.5 59.5 22 62 22 C59.5 20.5 58.5 18 59.5 15.5 C61 11.5 64.5 10 68 11Z" fill="rgba(201,168,76,0.65)"/>
+      <path d="M67 8 L68 11 L71 11 L68.8 13 L69.5 16 L67 14.5 L64.5 16 L65.2 13 L63 11 L66 11Z" fill="rgba(201,168,76,0.82)"/>
+      <!-- side small minarets -->
+      <rect x="8" y="24" width="8" height="18" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+      <path d="M8 24 Q12 18 16 24" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+      <rect x="114" y="24" width="8" height="18" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+      <path d="M114 24 Q118 18 122 24" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.22)" stroke-width="0.4"/>
+    </svg>
+  </div>
+  <div style="width:100%;text-align:center">
+    <div class="schedule-ar af" id="s4-ar">مَوَاعِيدُ الحَفْل</div>
+    <div class="schedule-title ar" id="s4-title">Event Schedule</div>
+    <div style="width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent);margin:8px auto 16px" class="af" id="s4-dv"></div>
+  </div>
+  <div class="event-card ar" id="s4-e1" style="transition-delay:.25s">
+    <div class="event-icon">🌸</div>
+    <div><span class="event-name">Haldi Ceremony</span><div class="event-date">27 March 2026</div><div class="event-day">Friday</div></div>
+  </div>
+  <div class="event-card ar" id="s4-e2" style="transition-delay:.5s;border-color:rgba(201,168,76,0.35)">
+    <div class="event-icon" style="background:rgba(201,168,76,0.14)">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 8 Q11 2 17 8 L17 19 L5 19Z" stroke="rgba(201,168,76,0.65)" stroke-width="0.8" fill="rgba(201,168,76,0.1)"/><circle cx="11" cy="14" r="2" fill="rgba(201,168,76,0.4)"/><path d="M8 7 C7 5 8 3 11 3 C14 3 15 5 14 7" stroke="rgba(201,168,76,0.4)" stroke-width="0.7" fill="none"/></svg>
+    </div>
+    <div><span class="event-name" style="color:var(--gold2)">Wedding Ceremony</span><div class="event-date" style="font-size:clamp(13px,2.8vw,16px);font-weight:500">28 March 2026</div><div class="event-day">Saturday · Nikah</div></div>
+  </div>
+  <div class="event-card ar" id="s4-e3" style="transition-delay:.75s;border-color:rgba(45,107,82,0.3)">
+    <div class="event-icon" style="background:rgba(45,107,82,0.14)">🎉</div>
+    <div><span class="event-name" style="color:rgba(180,230,200,0.85)">Reception</span><div class="event-date">29 March 2026</div><div class="event-day">Sunday · Walima</div></div>
+  </div>
+  <div style="margin-top:10px;text-align:center;font-style:italic;font-size:clamp(10px,2.2vw,13px);color:rgba(201,168,76,0.45)" class="af" id="s4-foot">Dakshin Dinajpur, West Bengal</div>
+</div>
+
+<!-- ═══ SCREEN 5: CLOSING ═══ -->
+<div class="screen" id="s5" style="background:radial-gradient(ellipse 90% 45% at 50% 80%,rgba(201,168,76,0.06) 0%,transparent 70%)">
+  <!-- GRAND mosque -->
+  <div style="position:absolute;bottom:0;left:0;right:0;z-index:3;pointer-events:none">
+    <svg viewBox="0 0 430 310" fill="none" preserveAspectRatio="xMidYMax meet" style="width:100%;display:block">
+      <defs>
+        <linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(90,60,10,0.22)"/>
+          <stop offset="50%" stop-color="rgba(120,80,15,0.18)"/>
+          <stop offset="100%" stop-color="rgba(26,74,58,0.38)"/>
+        </linearGradient>
+        <linearGradient id="mBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(4,10,22,0.93)"/>
+          <stop offset="100%" stop-color="rgba(4,10,22,1)"/>
+        </linearGradient>
+        <filter id="glo"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glo2"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="430" height="310" fill="url(#sunset)"/>
+      <!-- Far mosques left -->
+      <rect x="10" y="202" width="62" height="108" fill="rgba(4,10,22,0.58)"/>
+      <path d="M10 202 Q41 173 72 202" fill="rgba(4,10,22,0.58)"/>
+      <rect x="2" y="184" width="13" height="126" fill="rgba(4,10,22,0.58)"/>
+      <rect x="70" y="187" width="13" height="123" fill="rgba(4,10,22,0.58)"/>
+      <path d="M2 184 Q8 170 15 184" fill="rgba(4,10,22,0.58)"/>
+      <path d="M70 187 Q76 173 83 187" fill="rgba(4,10,22,0.58)"/>
+      <path d="M37 178 C33.5 178 31 181 31 185 C31 189 33.5 192 37 192 C34 190.5 33 187 34 184 C35.5 178.5 39 177 43.5 178Z" fill="rgba(201,168,76,0.6)"/>
+      <path d="M43 174 L44.3 178 L48 178 L45.3 180.5 L46.3 184.5 L43 182.5 L39.7 184.5 L40.7 180.5 L38 178 L41.7 178Z" fill="rgba(201,168,76,0.75)"/>
+      <!-- Far mosques right -->
+      <rect x="358" y="202" width="62" height="108" fill="rgba(4,10,22,0.58)"/>
+      <path d="M358 202 Q389 173 420 202" fill="rgba(4,10,22,0.58)"/>
+      <rect x="345" y="184" width="13" height="126" fill="rgba(4,10,22,0.58)"/>
+      <rect x="415" y="187" width="13" height="123" fill="rgba(4,10,22,0.58)"/>
+      <path d="M345 184 Q352 170 358 184" fill="rgba(4,10,22,0.58)"/>
+      <path d="M415 187 Q421 173 428 187" fill="rgba(4,10,22,0.58)"/>
+      <path d="M383 178 C379.5 178 377 181 377 185 C377 189 379.5 192 383 192 C380 190.5 379 187 380 184 C381.5 178.5 385 177 389.5 178Z" fill="rgba(201,168,76,0.6)"/>
+      <path d="M389 174 L390.3 178 L394 178 L391.3 180.5 L392.3 184.5 L389 182.5 L385.7 184.5 L386.7 180.5 L384 178 L387.7 178Z" fill="rgba(201,168,76,0.75)"/>
+      <!-- MAIN GRAND MOSQUE -->
+      <rect x="98" y="158" width="234" height="152" fill="url(#mBody)"/>
+      <!-- Grand dome -->
+      <path d="M115 158 Q215 62 315 158" fill="url(#mBody)"/>
+      <path d="M136 158 Q215 82 294 158" stroke="rgba(201,168,76,0.1)" stroke-width="1" fill="none"/>
+      <!-- Dome finial -->
+      <rect x="209" y="64" width="12" height="18" fill="url(#mBody)"/>
+      <rect x="206" y="60" width="18" height="8" fill="url(#mBody)"/>
+      <!-- TALL MINARETS -->
+      <rect x="73" y="82" width="24" height="228" fill="url(#mBody)"/>
+      <path d="M73 82 Q85 50 97 82" fill="url(#mBody)"/>
+      <rect x="77" y="44" width="16" height="24" fill="url(#mBody)"/>
+      <rect x="71" y="122" width="28" height="6" fill="rgba(201,168,76,0.2)"/>
+      <rect x="71" y="158" width="28" height="5" fill="rgba(201,168,76,0.14)"/>
+      <rect x="71" y="190" width="28" height="4" fill="rgba(201,168,76,0.1)"/>
+      <rect x="69" y="120" width="32" height="5" rx="1" fill="rgba(201,168,76,0.28)"/>
+      <rect x="333" y="82" width="24" height="228" fill="url(#mBody)"/>
+      <path d="M333 82 Q345 50 357 82" fill="url(#mBody)"/>
+      <rect x="337" y="44" width="16" height="24" fill="url(#mBody)"/>
+      <rect x="331" y="122" width="28" height="6" fill="rgba(201,168,76,0.2)"/>
+      <rect x="331" y="158" width="28" height="5" fill="rgba(201,168,76,0.14)"/>
+      <rect x="331" y="190" width="28" height="4" fill="rgba(201,168,76,0.1)"/>
+      <rect x="329" y="120" width="32" height="5" rx="1" fill="rgba(201,168,76,0.28)"/>
+      <!-- Secondary minarets -->
+      <rect x="106" y="114" width="17" height="196" fill="url(#mBody)"/>
+      <path d="M106 114 Q114 96 122 114" fill="url(#mBody)"/>
+      <rect x="307" y="114" width="17" height="196" fill="url(#mBody)"/>
+      <path d="M307 114 Q315 96 323 114" fill="url(#mBody)"/>
+      <!-- Side domes -->
+      <path d="M115 177 Q138 148 161 177" fill="url(#mBody)"/>
+      <path d="M269 177 Q292 148 315 177" fill="url(#mBody)"/>
+      <path d="M98 192 Q113 172 128 192" fill="url(#mBody)"/>
+      <path d="M302 192 Q317 172 332 192" fill="url(#mBody)"/>
+      <!-- Arch windows -->
+      <path d="M192 200 Q215 172 238 200 L238 255 L192 255Z" fill="rgba(201,168,76,0.07)"/>
+      <path d="M192 200 Q215 176 238 200" stroke="rgba(201,168,76,0.3)" stroke-width="1" fill="none"/>
+      <path d="M148 215 Q161 196 174 215 L174 255 L148 255Z" fill="rgba(201,168,76,0.04)"/>
+      <path d="M256 215 Q269 196 282 215 L282 255 L256 255Z" fill="rgba(201,168,76,0.04)"/>
+      <path d="M116 225 Q125 210 134 225 L134 255 L116 255Z" fill="rgba(201,168,76,0.03)"/>
+      <path d="M296 225 Q305 210 314 225 L314 255 L296 255Z" fill="rgba(201,168,76,0.03)"/>
+      <!-- CRESCENTS main minarets -->
+      <path d="M79 48 C75.5 48 72.5 51 72.5 55 C72.5 59 75.5 62 79 62 C75.5 60 74.5 56.5 75.5 53.5 C77 48 81 46 86 47.5Z" fill="rgba(201,168,76,0.82)" filter="url(#glo)"/>
+      <path d="M85 43 L86.5 48 L92 48 L87.5 51.5 L89 57 L85 54 L81 57 L82.5 51.5 L78 48 L83.5 48Z" fill="rgba(201,168,76,0.92)" filter="url(#glo)"/>
+      <path d="M339 48 C335.5 48 332.5 51 332.5 55 C332.5 59 335.5 62 339 62 C335.5 60 334.5 56.5 335.5 53.5 C337 48 341 46 346 47.5Z" fill="rgba(201,168,76,0.82)" filter="url(#glo)"/>
+      <path d="M345 43 L346.5 48 L352 48 L347.5 51.5 L349 57 L345 54 L341 57 L342.5 51.5 L338 48 L343.5 48Z" fill="rgba(201,168,76,0.92)" filter="url(#glo)"/>
+      <!-- Crescents secondary minarets -->
+      <path d="M109 97 C107 97 105 99.5 105 102.5 C105 105.5 107 108 109 108 C107 106.5 106.5 104 107.5 102 C108.5 97.5 111.5 96 115 97Z" fill="rgba(201,168,76,0.65)"/>
+      <path d="M114 94 L115 97 L118 97 L115.8 99 L116.5 102 L114 100.5 L111.5 102 L112.2 99 L110 97 L113 97Z" fill="rgba(201,168,76,0.75)"/>
+      <path d="M310 97 C308 97 306 99.5 306 102.5 C306 105.5 308 108 310 108 C308 106.5 307.5 104 308.5 102 C309.5 97.5 312.5 96 316 97Z" fill="rgba(201,168,76,0.65)"/>
+      <path d="M315 94 L316 97 L319 97 L316.8 99 L317.5 102 L315 100.5 L312.5 102 L313.2 99 L311 97 L314 97Z" fill="rgba(201,168,76,0.75)"/>
+      <!-- Main dome crescent -->
+      <path d="M208 67 C203.5 67 199 71.5 199 77 C199 82.5 203.5 87 208 87 C203.5 84.5 201.5 79 203.5 74.5 C206 67.5 213 64.5 220.5 66.5Z" fill="rgba(201,168,76,0.88)" filter="url(#glo2)"/>
+      <path d="M218 62 L220.5 68.5 L228 68.5 L222.5 73 L224.5 79.5 L218 76 L211.5 79.5 L213.5 73 L208 68.5 L215.5 68.5Z" fill="rgba(201,168,76,0.96)" filter="url(#glo2)"/>
+      <!-- Minaret lantern glows -->
+      <circle cx="85" cy="121" r="4" fill="rgba(255,200,80,0.6)" filter="url(#glo)"/>
+      <circle cx="345" cy="121" r="4" fill="rgba(255,200,80,0.6)" filter="url(#glo)"/>
+      <circle cx="114" cy="116" r="3" fill="rgba(255,200,80,0.45)"/>
+      <circle cx="316" cy="116" r="3" fill="rgba(255,200,80,0.45)"/>
+      <!-- ROPE with hanging mini lanterns between minarets -->
+      <path d="M97 128 Q215 136 333 128" stroke="rgba(201,168,76,0.16)" stroke-width="0.7" fill="none" stroke-dasharray="4 6"/>
+      <!-- Mini hanging lanterns -->
+      <rect x="153" y="130" width="6" height="12" rx="1.5" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.38)" stroke-width="0.4"/>
+      <ellipse cx="156" cy="144" rx="3" ry="1.8" fill="rgba(255,200,80,0.32)"/>
+      <rect x="212" y="132" width="6" height="12" rx="1.5" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.38)" stroke-width="0.4"/>
+      <ellipse cx="215" cy="146" rx="3" ry="1.8" fill="rgba(255,200,80,0.32)"/>
+      <rect x="271" y="130" width="6" height="12" rx="1.5" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.38)" stroke-width="0.4"/>
+      <ellipse cx="274" cy="144" rx="3" ry="1.8" fill="rgba(255,200,80,0.32)"/>
+      <!-- Ground -->
+      <rect x="0" y="303" width="430" height="8" fill="rgba(4,10,22,0.92)"/>
+    </svg>
+  </div>
+  <!-- Closing content -->
+  <div style="position:relative;z-index:4;width:100%;text-align:center;margin-top:-15%">
+    <div style="font-family:'Amiri',serif;font-size:clamp(14px,3.5vw,21px);color:rgba(201,168,76,0.46);margin-bottom:5px" class="af" id="s5-ar">دَعـوة كَريمة</div>
+    <div class="closing-msg ar" id="s5-msg">We request the honour of your presence to celebrate our Wedding</div>
+    <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent);margin:10px auto" class="af" id="s5-dv"></div>
+    <div class="closing-dua ar" id="s5-dua" style="transition-delay:.4s">بَارَكَ اللهُ لَكُم</div>
+    <div style="font-style:italic;font-size:clamp(9px,2vw,12px);color:rgba(201,168,76,.48);letter-spacing:1.5px" class="af" id="s5-en">May Allah bless you all</div>
+    <div style="margin:12px auto;text-align:center;font-size:clamp(10px,2.2vw,13px);color:rgba(253,248,238,.7);line-height:2;margin-bottom:42%" class="ar" id="s5-fam" style="transition-delay:.7s">
+      With love &amp; prayers,<br>
+      <span class="family-name">Sahar Ali Sarkar Family</span>
+      <span style="color:rgba(201,168,76,.35);margin:0 6px">✦</span>
+      <span class="family-name">Aminul Haque Family</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 6: COUNTDOWN ═══ -->
+<div class="screen" id="s6" style="background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(26,74,58,0.18) 0%,transparent 70%);padding-top:11%">
+
+  <!-- top arch decorative -->
+  <div style="position:absolute;top:8%;width:88%;z-index:3" class="af" id="s6-arch">
+    <svg viewBox="0 0 340 52" fill="none">
+      <path d="M8 52 Q8 18 90 8 Q170 1 250 8 Q332 18 332 52" stroke="rgba(201,168,76,0.38)" stroke-width="1" fill="rgba(201,168,76,0.015)"/>
+      <circle cx="170" cy="4" r="3.5" fill="rgba(201,168,76,0.55)"/>
+      <ellipse cx="42" cy="32" rx="7" ry="4" fill="rgba(201,168,76,0.13)" transform="rotate(-28 42 32)"/>
+      <ellipse cx="298" cy="32" rx="7" ry="4" fill="rgba(201,168,76,0.13)" transform="rotate(28 298 32)"/>
+      <path d="M100 14 L101 17 L104 17 L101.5 19 L102.5 22 L100 20.5 L97.5 22 L98.5 19 L96 17 L99 17Z" fill="rgba(201,168,76,0.42)"/>
+      <path d="M240 14 L241 17 L244 17 L241.5 19 L242.5 22 L240 20.5 L237.5 22 L238.5 19 L236 17 L239 17Z" fill="rgba(201,168,76,0.42)"/>
+    </svg>
+  </div>
+
+  <div style="width:100%;text-align:center;position:relative;z-index:2">
+    <!-- Arabic -->
+    <div style="font-family:'Amiri',serif;font-size:clamp(14px,3.2vw,20px);color:rgba(201,168,76,0.42);margin-bottom:6px" class="af" id="s6-ar">العَدُّ التَّنازُلِي</div>
+    <!-- Title -->
+    <div class="cd-title af" id="s6-title">Counting Down To</div>
+    <!-- Crescent + star motif -->
+    <div class="af" id="s6-motif" style="margin:5px 0">
+      <svg width="55" height="26" viewBox="0 0 55 26" fill="none" style="margin:0 auto;display:block">
+        <path d="M13 4 C8.5 4 5 8 5 13 C5 18 8.5 22 13 22 C9.5 20.5 7.5 17 8.5 13 C9.5 7.5 14 5 20 6Z" fill="rgba(201,168,76,0.68)"/>
+        <path d="M19 1 L20.5 6 L26 6 L21.5 9.5 L23 14 L19 11.5 L15 14 L16.5 9.5 L12 6 L17.5 6Z" fill="rgba(201,168,76,0.88)"/>
+        <line x1="30" y1="13" x2="55" y2="13" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+        <circle cx="42" cy="13" r="1.5" fill="rgba(201,168,76,0.4)"/>
+      </svg>
+    </div>
+    <!-- Event name badge -->
+    <div class="cd-date-badge ar" id="s6-badge">
+      💍 Nikah &nbsp;·&nbsp; 28 March 2026 &nbsp;·&nbsp; Saturday
+    </div>
+
+    <!-- COUNTDOWN TILES -->
+    <div class="cd-wrap ar" id="s6-tiles">
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-days">00</span></div>
+        <div class="cd-label">Days</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-hrs">00</span></div>
+        <div class="cd-label">Hours</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-min">00</span></div>
+        <div class="cd-label">Mins</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-sec">00</span></div>
+        <div class="cd-label">Secs</div>
+      </div>
+    </div>
+
+    <!-- Day passed message -->
+    <div class="cd-finished" id="cd-done">The Wedding Day Has Arrived! 🎉</div>
+
+    <!-- Divider -->
+    <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.45),transparent);margin:14px auto" class="af" id="s6-dv"></div>
+
+    <!-- Afifa & Naim -->
+    <div style="font-family:'Great Vibes',cursive;font-size:clamp(28px,7vw,44px);color:rgba(201,168,76,0.85);text-shadow:0 0 25px rgba(201,168,76,0.4);line-height:1.2" class="as" id="s6-names">Afifa &amp; Naim</div>
+
+    <!-- Dua -->
+    <div style="font-family:'Amiri',serif;font-size:clamp(12px,2.8vw,17px);color:rgba(201,168,76,0.5);margin-top:6px" class="af" id="s6-dua">بَارَكَ اللهُ لَكُم وَبَارَكَ عَلَيْكُم</div>
+    <div style="font-style:italic;font-size:clamp(9px,1.9vw,11px);color:rgba(201,168,76,0.35);letter-spacing:1.5px" class="af" id="s6-dua2">May Allah bless you and shower blessings upon you</div>
+
+    <!-- Bottom ornament -->
+    <div class="orn-row af" id="s6-orn" style="margin:10px auto">
+      <div class="orn-l"></div>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1 L10.5 6 L16 6 L11.5 9.5 L13 14 L9 11.5 L5 14 L6.5 9.5 L2 6 L7.5 6Z" fill="rgba(201,168,76,0.55)"/></svg>
+      <div class="orn-l r"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAY BUTTON -->
+<div id="playBtn">
+  <div class="play-ring">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><polygon points="9,4 24,14 9,24" fill="#C9A84C"/></svg>
+  </div>
+  <p>Play Invitation</p>
+</div>
+<div id="progress"></div>
+</div>
+
+<script>
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+const stage=document.getElementById('stage');
+canvas.width=stage.offsetWidth;canvas.height=stage.offsetHeight;
+
+const stars=Array.from({length:140},()=>({x:Math.random(),y:Math.random()*.72,r:Math.random()*1.6+.3,a:Math.random(),da:.004+Math.random()*.012,dir:Math.random()>.5?1:-1}));
+const particles=Array.from({length:70},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.35,vy:-.15-Math.random()*.45,r:Math.random()*2+.5,life:Math.random()}));
+const petals=Array.from({length:24},()=>({x:Math.random()*canvas.width,y:-30+Math.random()*-120,vy:.35+Math.random()*.6,vx:(Math.random()-.5)*.5,rot:Math.random()*Math.PI*2,drot:.008+Math.random()*.025,w:7+Math.random()*7,h:4+Math.random()*5,a:.22+Math.random()*.38,hue:Math.random()>.3?'201,168,76':'45,107,82'}));
+
+let frame=0;
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const g=ctx.createLinearGradient(0,0,0,canvas.height);
+  g.addColorStop(0,'#030A12');g.addColorStop(.5,'#05101A');g.addColorStop(1,'#061320');
+  ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);
+  const eg=ctx.createRadialGradient(canvas.width/2,canvas.height,0,canvas.width/2,canvas.height,canvas.width*.75);
+  eg.addColorStop(0,'rgba(18,55,40,0.2)');eg.addColorStop(1,'transparent');
+  ctx.fillStyle=eg;ctx.fillRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{s.a+=s.da*s.dir;if(s.a>1||s.a<.08)s.dir*=-1;ctx.save();ctx.globalAlpha=s.a*.85;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2);ctx.fill();ctx.restore()});
+  particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=canvas.height+10;p.x=Math.random()*canvas.width;}const a=Math.sin(p.life+frame*.018)*.5+.5;ctx.save();ctx.globalAlpha=a*.48;ctx.fillStyle='rgba(201,168,76,1)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore()});
+  petals.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.drot;if(p.y>canvas.height+20){p.y=-20;p.x=Math.random()*canvas.width;}ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.a;ctx.fillStyle=`rgba(${p.hue},0.5)`;ctx.beginPath();ctx.ellipse(0,0,p.w/2,p.h/2,0,0,Math.PI*2);ctx.fill();ctx.restore()});
+  frame++;requestAnimationFrame(draw);
+}
+draw();
+
+// ── LIVE COUNTDOWN ──
+const WEDDING = new Date('2026-03-28T00:00:00').getTime();
+function pad(n){return String(n).padStart(2,'0')}
+function updateCountdown(){
+  const now=Date.now();
+  const diff=WEDDING-now;
+  const tiles=document.getElementById('s6-tiles');
+  const done=document.getElementById('cd-done');
+  if(diff<=0){
+    if(tiles)tiles.style.display='none';
+    if(done)done.style.display='block';
+    return;
+  }
+  const days=Math.floor(diff/86400000);
+  const hrs=Math.floor((diff%86400000)/3600000);
+  const min=Math.floor((diff%3600000)/60000);
+  const sec=Math.floor((diff%60000)/1000);
+  const prev={d:document.getElementById('cd-days').textContent,h:document.getElementById('cd-hrs').textContent,m:document.getElementById('cd-min').textContent,s:document.getElementById('cd-sec').textContent};
+  const nd=pad(days),nh=pad(hrs),nm=pad(min),ns=pad(sec);
+  function setVal(id,val,old){
+    const el=document.getElementById(id);
+    if(el&&val!==old){el.textContent=val;el.style.animation='none';void el.offsetWidth;el.style.animation='cdPulse 0.4s ease-out'}
+  }
+  setVal('cd-days',nd,prev.d);setVal('cd-hrs',nh,prev.h);setVal('cd-min',nm,prev.m);setVal('cd-sec',ns,prev.s);
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+// ── SEQUENCER ──
+const screens=['s1','s2','s3','s4','s5','s6'];
+const animEls={
+  s1:['s1-moon','s1-arch','s1-bism','s1-div','s1-en','s1-motif','s1-sub','s1-names'],
+  s2:['s2-arab','s2-badge','s2-arch','s2-name','s2-title','s2-addr','s2-dv','s2-crescent','s2-orn'],
+  s3:['s3-arab','s3-badge','s3-arch','s3-name','s3-title','s3-addr','s3-dv','s3-crescent','s3-orn'],
+  s4:['s4-mini','s4-ar','s4-title','s4-dv','s4-e1','s4-e2','s4-e3','s4-foot'],
+  s5:['s5-ar','s5-msg','s5-dv','s5-dua','s5-en','s5-fam'],
+  s6:['s6-ar','s6-arch','s6-title','s6-motif','s6-badge','s6-tiles','s6-dv','s6-names','s6-dua','s6-dua2','s6-orn']
+};
+const durations=[5500,5500,5500,6500,6500,8000];
+const total=durations.reduce((a,b)=>a+b,0);
+let current=-1,startTime=0,playing=false;
+
+function hideAll(){screens.forEach(id=>{document.getElementById(id).classList.remove('active');(animEls[id]||[]).forEach(eid=>{const e=document.getElementById(eid);if(e)e.classList.remove('in')})})}
+function showScreen(idx){hideAll();document.getElementById(screens[idx]).classList.add('active');(animEls[screens[idx]]||[]).forEach((eid,i)=>{const e=document.getElementById(eid);if(e)setTimeout(()=>e.classList.add('in'),110+i*165)})}
+function tick(){
+  if(!playing)return;
+  const now=performance.now();const elapsed=(now-startTime)%total;
+  let acc=0,idx=0;for(let i=0;i<durations.length;i++){acc+=durations[i];if(elapsed<acc){idx=i;break;}}
+  if(idx!==current){current=idx;showScreen(idx);}
+  document.getElementById('progress').style.width=((now-startTime)%total/total*100)+'%';
+  requestAnimationFrame(tick);
+}
+document.getElementById('playBtn').addEventListener('click',()=>{document.getElementById('playBtn').classList.add('gone');playing=true;startTime=performance.now();tick()});
+</script>
+</body>
+</html>
