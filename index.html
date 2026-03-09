@@ -12,11 +12,11 @@
   --gold-dim:rgba(201,168,76,0.3);
   --em:#1A4A3A;--em2:#0F3028;--em3:#2D6B52;
   --deep:#040C14;--cream:#FDF8EE;
-  --ts:rgba(253,248,238,0.85);
+  --ts:rgba(238,232,216,0.95);
 }
 html,body{height:100%;width:100%;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Cormorant Garamond',serif}
 
-#stage{width:min(430px,95vw);height:min(764px,97vh);position:relative;overflow:hidden;background:var(--deep);box-shadow:0 0 120px rgba(201,168,76,0.15),0 0 400px rgba(0,0,0,0.9)}
+#stage{width:min(430px,100vw);height:min(764px,100vh);position:relative;overflow:hidden;background:var(--deep);box-shadow:0 0 120px rgba(201,168,76,0.15),0 0 400px rgba(0,0,0,0.9)}
 #bgCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .geo{position:absolute;inset:0;z-index:1;opacity:0.055;pointer-events:none;
   background-image:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(201,168,76,.5) 38px,rgba(201,168,76,.5) 39px),
@@ -28,83 +28,90 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
 .screen{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5% 6%;opacity:0;pointer-events:none;transition:opacity .8s ease}
 .screen.active{opacity:1;pointer-events:all}
 
-/* TEXT */
-.bismillah-ar{font-family:'Amiri',serif;font-size:clamp(19px,5vw,27px);color:var(--gold2);text-shadow:0 0 30px rgba(201,168,76,.7);line-height:2;letter-spacing:3px;animation:glowT 3s ease-in-out infinite}
-@keyframes glowT{0%,100%{text-shadow:0 0 20px rgba(201,168,76,.5)}50%{text-shadow:0 0 55px rgba(201,168,76,1),0 0 100px rgba(201,168,76,.4)}}
-.bismillah-en{font-style:italic;font-size:clamp(10px,2.2vw,13px);color:rgba(232,201,106,.65);letter-spacing:1.5px;margin-top:8px}
-.section-badge{font-family:'Amiri',serif;font-size:clamp(11px,2.5vw,15px);color:var(--gold);letter-spacing:3px;border:1px solid var(--gold-dim);padding:4px 18px;border-radius:20px;margin-bottom:12px;background:rgba(201,168,76,.05)}
-.person-name{font-family:'Great Vibes',cursive;font-size:clamp(32px,8.5vw,52px);color:var(--gold2);text-shadow:0 0 30px rgba(201,168,76,.5);line-height:1.15;margin-bottom:4px}
-.person-sub{font-family:'Cinzel Decorative',serif;font-size:clamp(8px,1.8vw,11px);color:rgba(232,201,106,.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
-.address-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);border-radius:6px;padding:13px 18px;width:88%;margin:0 auto 12px}
-.address-row{display:flex;align-items:flex-start;gap:10px;padding:5px 0;font-size:clamp(10px,2.2vw,13px);color:var(--ts);line-height:1.5;border-bottom:1px solid rgba(201,168,76,.06)}
+/* ── MOBILE-FIRST TEXT – BIGGER, BOLDER, CRISPER ── */
+.bismillah-ar{font-family:'Amiri',serif;font-size:clamp(22px,6.5vw,34px);font-weight:700;color:#F5E19A;text-shadow:0 0 24px rgba(201,168,76,.8),0 2px 4px rgba(0,0,0,.6);line-height:2;letter-spacing:3px;animation:glowT 3s ease-in-out infinite}
+@keyframes glowT{0%,100%{text-shadow:0 2px 4px rgba(0,0,0,.6),0 0 24px rgba(201,168,76,.6)}50%{text-shadow:0 2px 4px rgba(0,0,0,.6),0 0 50px rgba(201,168,76,1),0 0 90px rgba(201,168,76,.4)}}
+.bismillah-en{font-style:italic;font-size:clamp(13px,3.5vw,17px);font-weight:600;color:rgba(245,225,154,.85);letter-spacing:1.5px;margin-top:10px;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.section-badge{font-family:'Amiri',serif;font-size:clamp(14px,3.8vw,18px);font-weight:700;color:#F5E19A;letter-spacing:3px;border:1px solid rgba(201,168,76,.5);padding:5px 20px;border-radius:20px;margin-bottom:12px;background:rgba(201,168,76,.08);text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.person-name{font-family:'Great Vibes',cursive;font-size:clamp(38px,10vw,60px);color:#F5E19A;text-shadow:0 2px 8px rgba(0,0,0,.7),0 0 30px rgba(201,168,76,.6);line-height:1.15;margin-bottom:4px}
+.person-sub{font-family:'Cinzel Decorative',serif;font-size:clamp(11px,2.8vw,14px);font-weight:700;color:rgba(245,225,154,.9);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.address-card{background:rgba(10,25,50,.55);border:1px solid rgba(201,168,76,.28);border-radius:8px;padding:14px 18px;width:88%;margin:0 auto 12px;backdrop-filter:blur(4px)}
+.address-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:clamp(13px,3.5vw,16px);font-weight:600;color:#EEE8D8;line-height:1.5;border-bottom:1px solid rgba(201,168,76,.1)}
 .address-row:last-child{border-bottom:none}
-.addr-icon{color:var(--gold);flex-shrink:0;font-size:12px;margin-top:2px}
-.addr-label{color:rgba(201,168,76,.6);font-size:.82em;letter-spacing:1px;display:block}
+.addr-icon{color:var(--gold2);flex-shrink:0;font-size:14px;margin-top:2px}
+.addr-label{color:#E8C96A;font-size:.82em;font-weight:700;letter-spacing:1px;display:block;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .divider-gold{width:55%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:10px auto}
 .orn-row{display:flex;align-items:center;gap:8px;margin:4px 0;width:70%}
 .orn-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4))}
 .orn-l.r{background:linear-gradient(90deg,rgba(201,168,76,.4),transparent)}
-.orn-d{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
-.schedule-title{font-family:'Cinzel Decorative',serif;font-size:clamp(13px,3vw,18px);color:var(--gold2);letter-spacing:3px;text-shadow:0 0 20px rgba(201,168,76,.4);margin-bottom:6px}
-.schedule-ar{font-family:'Amiri',serif;font-size:clamp(14px,3.2vw,20px);color:rgba(201,168,76,.5);margin-bottom:18px}
-.event-card{width:88%;background:linear-gradient(135deg,rgba(26,74,58,.15),rgba(6,15,26,.4));border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:13px 18px;margin-bottom:11px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
-.event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--em3))}
-.event-icon{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.event-name{font-family:'Cinzel Decorative',serif;font-size:clamp(9px,2vw,12px);color:var(--gold2);letter-spacing:1px;display:block;margin-bottom:2px}
-.event-date{font-size:clamp(11px,2.5vw,15px);color:var(--cream);font-weight:300}
-.event-day{font-size:clamp(9px,1.8vw,11px);color:rgba(201,168,76,.55);letter-spacing:2px;text-transform:uppercase}
-.closing-msg{font-family:'Great Vibes',cursive;font-size:clamp(17px,4.5vw,26px);color:var(--gold2);text-align:center;text-shadow:0 0 25px rgba(201,168,76,.5);line-height:1.6;max-width:85%;margin:12px 0}
-.closing-dua{font-family:'Amiri',serif;font-size:clamp(15px,3.5vw,22px);color:rgba(232,201,106,.75);text-align:center;text-shadow:0 0 20px rgba(201,168,76,.4);line-height:1.9;margin:6px 0}
-.family-name{color:var(--gold2);letter-spacing:1px}
+.orn-d{width:6px;height:6px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 6px rgba(201,168,76,.5)}
+.schedule-title{font-family:'Cinzel Decorative',serif;font-size:clamp(16px,4.2vw,22px);font-weight:700;color:#F5E19A;letter-spacing:3px;text-shadow:0 2px 6px rgba(0,0,0,.6),0 0 20px rgba(201,168,76,.4);margin-bottom:6px}
+.schedule-ar{font-family:'Amiri',serif;font-size:clamp(16px,4vw,22px);font-weight:700;color:rgba(245,225,154,.65);margin-bottom:18px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.event-card{width:88%;background:linear-gradient(135deg,rgba(15,48,40,.45),rgba(4,12,20,.65));border:1px solid rgba(201,168,76,.28);border-radius:10px;padding:14px 18px;margin-bottom:12px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;backdrop-filter:blur(4px)}
+.event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold2),var(--em3))}
+.event-icon{width:42px;height:42px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.event-name{font-family:'Cinzel Decorative',serif;font-size:clamp(11px,3vw,14px);font-weight:700;color:#F5E19A;letter-spacing:1px;display:block;margin-bottom:3px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.event-date{font-size:clamp(14px,3.8vw,18px);font-weight:700;color:#EEE8D8;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.event-day{font-size:clamp(11px,2.8vw,13px);font-weight:600;color:rgba(232,201,106,.75);letter-spacing:2px;text-transform:uppercase}
+.closing-msg{font-family:'Great Vibes',cursive;font-size:clamp(20px,5.5vw,30px);color:#F5E19A;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.7),0 0 25px rgba(201,168,76,.5);line-height:1.6;max-width:85%;margin:12px 0}
+.closing-dua{font-family:'Amiri',serif;font-size:clamp(18px,4.5vw,26px);font-weight:700;color:#F0D878;text-align:center;text-shadow:0 2px 6px rgba(0,0,0,.6),0 0 20px rgba(201,168,76,.4);line-height:1.9;margin:6px 0}
+.family-name{color:#F5E19A;font-weight:700;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 
 /* COUNTDOWN */
 .cd-wrap{display:flex;gap:10px;justify-content:center;align-items:flex-start;margin:16px 0}
-.cd-unit{display:flex;flex-direction:column;align-items:center;gap:4px}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:5px}
 .cd-box{
-  width:clamp(60px,14vw,76px);height:clamp(60px,14vw,76px);
+  width:clamp(68px,17vw,84px);height:clamp(68px,17vw,84px);
   position:relative;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(145deg,rgba(201,168,76,0.12),rgba(26,74,58,0.18));
-  border:1px solid rgba(201,168,76,0.35);border-radius:6px;
-  overflow:hidden;
+  background:linear-gradient(145deg,rgba(201,168,76,0.14),rgba(26,74,58,0.22));
+  border:1px solid rgba(201,168,76,0.4);border-radius:8px;
+  overflow:hidden;backdrop-filter:blur(4px);
 }
-.cd-box::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,transparent 50%)}
-.cd-box::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(201,168,76,0.2)}
+.cd-box::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.05) 0%,transparent 50%)}
+.cd-box::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(201,168,76,0.25)}
 .cd-num{
   font-family:'Cinzel Decorative',serif;
-  font-size:clamp(22px,6vw,34px);
-  color:var(--gold2);
-  text-shadow:0 0 20px rgba(201,168,76,0.6);
+  font-size:clamp(26px,7.5vw,40px);
+  font-weight:700;
+  color:#F5E19A;
+  text-shadow:0 2px 6px rgba(0,0,0,.7),0 0 20px rgba(201,168,76,.7);
   line-height:1;
   animation:cdPulse 1s ease-in-out;
 }
-@keyframes cdPulse{0%{transform:scale(1.15);opacity:.6}100%{transform:scale(1);opacity:1}}
+@keyframes cdPulse{0%{transform:scale(1.18);opacity:.5}100%{transform:scale(1);opacity:1}}
 .cd-label{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(8px,1.8vw,10px);
-  color:rgba(201,168,76,0.6);
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(10px,2.5vw,12px);
+  font-weight:700;
+  color:#E8C96A;
   letter-spacing:2px;text-transform:uppercase;
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
 }
 .cd-sep{
   font-family:'Amiri',serif;
-  font-size:clamp(22px,6vw,30px);
-  color:rgba(201,168,76,0.5);
+  font-size:clamp(28px,7vw,36px);
+  font-weight:700;
+  color:rgba(245,225,154,.6);
   margin-top:14px;
+  text-shadow:0 0 12px rgba(201,168,76,.4);
   animation:blink 1s step-start infinite;
 }
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.cd-title{font-family:'Cinzel Decorative',serif;font-size:clamp(11px,2.5vw,15px);color:var(--gold2);letter-spacing:3px;text-align:center;margin-bottom:4px;text-shadow:0 0 15px rgba(201,168,76,.4)}
-.cd-subtitle{font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(201,168,76,.45);text-align:center;margin-bottom:14px}
-.cd-event-label{font-size:clamp(10px,2.2vw,13px);color:rgba(253,248,238,.6);font-style:italic;letter-spacing:1.5px;text-align:center;margin-top:10px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
+.cd-title{font-family:'Cinzel Decorative',serif;font-size:clamp(13px,3.5vw,17px);font-weight:700;color:#F5E19A;letter-spacing:3px;text-align:center;margin-bottom:4px;text-shadow:0 2px 5px rgba(0,0,0,.6),0 0 15px rgba(201,168,76,.4)}
+.cd-subtitle{font-family:'Amiri',serif;font-size:clamp(14px,3.5vw,18px);font-weight:700;color:rgba(245,225,154,.55);text-align:center;margin-bottom:14px}
+.cd-event-label{font-size:clamp(12px,3vw,15px);font-weight:600;color:rgba(238,232,216,.8);font-style:italic;letter-spacing:1.5px;text-align:center;margin-top:10px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
 .cd-date-badge{
-  background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(26,74,58,0.15));
-  border:1px solid rgba(201,168,76,0.28);
-  border-radius:8px;padding:8px 22px;margin:10px 0 4px;
+  background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(26,74,58,0.2));
+  border:1px solid rgba(201,168,76,0.35);
+  border-radius:8px;padding:9px 22px;margin:10px 0 4px;
   font-family:'Cinzel Decorative',serif;
-  font-size:clamp(10px,2.2vw,13px);
-  color:var(--gold2);letter-spacing:2px;
+  font-size:clamp(11px,3vw,14px);
+  font-weight:700;
+  color:#F5E19A;letter-spacing:2px;
   text-align:center;
+  text-shadow:0 1px 4px rgba(0,0,0,.6);
 }
-.cd-finished{font-family:'Great Vibes',cursive;font-size:clamp(26px,7vw,42px);color:var(--gold2);text-align:center;text-shadow:0 0 30px rgba(201,168,76,.6);display:none}
+.cd-finished{font-family:'Great Vibes',cursive;font-size:clamp(28px,8vw,44px);color:#F5E19A;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.6),0 0 30px rgba(201,168,76,.6);display:none}
 .moon-wrap{position:absolute;top:11%;left:50%;transform:translateX(-50%);animation:floatMoon 6s ease-in-out infinite;z-index:3}
 @keyframes floatMoon{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
 .ray{position:absolute;top:0;left:50%;width:2px;transform-origin:top center;background:linear-gradient(180deg,rgba(201,168,76,.55) 0%,transparent 100%);animation:rayP 3s ease-in-out infinite}
@@ -385,14 +392,14 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
         <circle cx="55" cy="15" r="1" fill="rgba(201,168,76,0.35)"/>
       </svg>
     </div>
-    <div style="font-size:clamp(11px,2.5vw,14px);color:rgba(253,248,238,0.48);letter-spacing:4px;text-transform:uppercase;margin-top:10px" class="ar" id="s1-sub">Wedding Invitation</div>
-    <div style="font-family:'Great Vibes',cursive;font-size:clamp(30px,7.5vw,46px);color:rgba(201,168,76,0.85);margin-top:10px;text-shadow:0 0 25px rgba(201,168,76,0.4)" class="as" id="s1-names">Afifa &amp; Naim</div>
+    <div style="font-size:clamp(13px,3.5vw,16px);font-weight:700;color:rgba(238,232,216,0.75);letter-spacing:4px;text-transform:uppercase;margin-top:10px;text-shadow:0 1px 4px rgba(0,0,0,.6)" class="ar" id="s1-sub">Wedding Invitation</div>
+    <div style="font-family:'Great Vibes',cursive;font-size:clamp(36px,9vw,54px);color:#F5E19A;margin-top:10px;text-shadow:0 2px 10px rgba(0,0,0,.7),0 0 28px rgba(201,168,76,0.5)" class="as" id="s1-names">Afifa &amp; Naim</div>
   </div>
 </div>
 
 <!-- ═══ SCREEN 2: BRIDE ═══ -->
 <div class="screen" id="s2" style="background:radial-gradient(ellipse 80% 55% at 50% 35%,rgba(26,74,58,0.18) 0%,transparent 70%);padding-top:13%">
-  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(201,168,76,0.38)" class="af" id="s2-arab">الـعـروس</div>
+  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(18px,4.5vw,24px);font-weight:700;color:rgba(245,225,154,0.55);text-shadow:0 1px 4px rgba(0,0,0,.5)" class="af" id="s2-arab">الـعـروس</div>
   <div style="width:85%;margin:0 auto 6px" class="as" id="s2-arch">
     <svg viewBox="0 0 340 70" fill="none">
       <path d="M8 70 Q8 22 90 10 Q170 2 250 10 Q332 22 332 70" stroke="rgba(201,168,76,0.5)" stroke-width="1" fill="rgba(201,168,76,0.02)"/>
@@ -429,7 +436,7 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
 
 <!-- ═══ SCREEN 3: GROOM ═══ -->
 <div class="screen" id="s3" style="background:radial-gradient(ellipse 80% 55% at 50% 35%,rgba(15,48,40,0.2) 0%,transparent 70%);padding-top:13%">
-  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(13px,3vw,18px);color:rgba(45,107,82,0.5)" class="af" id="s3-arab">العـريـس</div>
+  <div style="position:absolute;top:7%;width:100%;text-align:center;font-family:'Amiri',serif;font-size:clamp(18px,4.5vw,24px);font-weight:700;color:rgba(45,107,82,0.65);text-shadow:0 1px 4px rgba(0,0,0,.5)" class="af" id="s3-arab">العـريـس</div>
   <div style="width:85%;margin:0 auto 6px" class="as" id="s3-arch">
     <svg viewBox="0 0 340 70" fill="none">
       <path d="M8 70 Q8 22 90 10 Q170 2 250 10 Q332 22 332 70" stroke="rgba(45,107,82,0.65)" stroke-width="1" fill="rgba(45,107,82,0.03)"/>
@@ -505,7 +512,7 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
     <div class="event-icon" style="background:rgba(45,107,82,0.14)">🎉</div>
     <div><span class="event-name" style="color:rgba(180,230,200,0.85)">Reception</span><div class="event-date">29 March 2026</div><div class="event-day">Sunday · Walima</div></div>
   </div>
-  <div style="margin-top:10px;text-align:center;font-style:italic;font-size:clamp(10px,2.2vw,13px);color:rgba(201,168,76,0.45)" class="af" id="s4-foot">Dakshin Dinajpur, West Bengal</div>
+  <div style="margin-top:10px;text-align:center;font-style:italic;font-size:clamp(13px,3.2vw,16px);font-weight:600;color:rgba(232,201,106,0.65);text-shadow:0 1px 3px rgba(0,0,0,.5)" class="af" id="s4-foot">Dakshin Dinajpur, West Bengal</div>
 </div>
 
 <!-- ═══ SCREEN 5: CLOSING ═══ -->
@@ -618,15 +625,15 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
   </div>
   <!-- Closing content -->
   <div style="position:relative;z-index:4;width:100%;text-align:center;margin-top:-15%">
-    <div style="font-family:'Amiri',serif;font-size:clamp(14px,3.5vw,21px);color:rgba(201,168,76,0.46);margin-bottom:5px" class="af" id="s5-ar">دَعـوة كَريمة</div>
+    <div style="font-family:'Amiri',serif;font-size:clamp(18px,4.5vw,24px);font-weight:700;color:rgba(245,225,154,0.58);margin-bottom:5px;text-shadow:0 1px 4px rgba(0,0,0,.5)" class="af" id="s5-ar">دَعـوة كَريمة</div>
     <div class="closing-msg ar" id="s5-msg">We request the honour of your presence to celebrate our Wedding</div>
     <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent);margin:10px auto" class="af" id="s5-dv"></div>
     <div class="closing-dua ar" id="s5-dua" style="transition-delay:.4s">بَارَكَ اللهُ لَكُم</div>
-    <div style="font-style:italic;font-size:clamp(9px,2vw,12px);color:rgba(201,168,76,.48);letter-spacing:1.5px" class="af" id="s5-en">May Allah bless you all</div>
-    <div style="margin:12px auto;text-align:center;font-size:clamp(10px,2.2vw,13px);color:rgba(253,248,238,.7);line-height:2;margin-bottom:42%" class="ar" id="s5-fam" style="transition-delay:.7s">
+    <div style="font-style:italic;font-size:clamp(13px,3vw,15px);font-weight:600;color:rgba(232,201,106,.65);letter-spacing:1.5px;text-shadow:0 1px 3px rgba(0,0,0,.5)" class="af" id="s5-en">May Allah bless you all</div>
+    <div style="margin:12px auto;text-align:center;font-size:clamp(13px,3.2vw,16px);font-weight:600;color:rgba(238,232,216,.85);line-height:2;margin-bottom:42%;text-shadow:0 1px 3px rgba(0,0,0,.5)" class="ar" id="s5-fam">
       With love &amp; prayers,<br>
       <span class="family-name">Sahar Ali Sarkar Family</span>
-      <span style="color:rgba(201,168,76,.35);margin:0 6px">✦</span>
+      <span style="color:rgba(201,168,76,.4);margin:0 6px">✦</span>
       <span class="family-name">Aminul Haque Family</span>
     </div>
   </div>
@@ -649,7 +656,7 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
 
   <div style="width:100%;text-align:center;position:relative;z-index:2">
     <!-- Arabic -->
-    <div style="font-family:'Amiri',serif;font-size:clamp(14px,3.2vw,20px);color:rgba(201,168,76,0.42);margin-bottom:6px" class="af" id="s6-ar">العَدُّ التَّنازُلِي</div>
+    <div style="font-family:'Amiri',serif;font-size:clamp(18px,4.5vw,24px);font-weight:700;color:rgba(245,225,154,0.52);margin-bottom:6px;text-shadow:0 1px 4px rgba(0,0,0,.5)" class="af" id="s6-ar">العَدُّ التَّنازُلِي</div>
     <!-- Title -->
     <div class="cd-title af" id="s6-title">Counting Down To</div>
     <!-- Crescent + star motif -->
@@ -696,11 +703,11 @@ html,body{height:100%;width:100%;background:#000;display:flex;align-items:center
     <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.45),transparent);margin:14px auto" class="af" id="s6-dv"></div>
 
     <!-- Afifa & Naim -->
-    <div style="font-family:'Great Vibes',cursive;font-size:clamp(28px,7vw,44px);color:rgba(201,168,76,0.85);text-shadow:0 0 25px rgba(201,168,76,0.4);line-height:1.2" class="as" id="s6-names">Afifa &amp; Naim</div>
+    <div style="font-family:'Great Vibes',cursive;font-size:clamp(36px,9vw,52px);color:#F5E19A;text-shadow:0 2px 10px rgba(0,0,0,.7),0 0 28px rgba(201,168,76,0.5);line-height:1.2" class="as" id="s6-names">Afifa &amp; Naim</div>
 
     <!-- Dua -->
-    <div style="font-family:'Amiri',serif;font-size:clamp(12px,2.8vw,17px);color:rgba(201,168,76,0.5);margin-top:6px" class="af" id="s6-dua">بَارَكَ اللهُ لَكُم وَبَارَكَ عَلَيْكُم</div>
-    <div style="font-style:italic;font-size:clamp(9px,1.9vw,11px);color:rgba(201,168,76,0.35);letter-spacing:1.5px" class="af" id="s6-dua2">May Allah bless you and shower blessings upon you</div>
+    <div style="font-family:'Amiri',serif;font-size:clamp(16px,4vw,22px);font-weight:700;color:rgba(245,225,154,0.65);margin-top:6px;text-shadow:0 1px 4px rgba(0,0,0,.5)" class="af" id="s6-dua">بَارَكَ اللهُ لَكُم وَبَارَكَ عَلَيْكُم</div>
+    <div style="font-style:italic;font-size:clamp(12px,2.8vw,14px);font-weight:600;color:rgba(232,201,106,0.55);letter-spacing:1.5px;text-shadow:0 1px 3px rgba(0,0,0,.5)" class="af" id="s6-dua2">May Allah bless you and shower blessings upon you</div>
 
     <!-- Bottom ornament -->
     <div class="orn-row af" id="s6-orn" style="margin:10px auto">
